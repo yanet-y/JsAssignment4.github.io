@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Exercise4</title>
+</head>
+<body>
+    <h1>JavaScript Exercises</h1>
+
+    <h2>Exercise 1: Check Leap Year</h2>
+    <label for="year">Enter a year:</label>
+    <input type="number" id="year">
+    <button onclick="checkLeapYear()">Check Leap Year</button>
+    <p id="leapYearResult"></p>
+
+    <h2>Exercise 2: Find Sundays</h2>
+    <p>Years when January 1st is a Sunday:</p>
+    <ul id="sundayYears"></ul>
+
+    <h2>Exercise 3: Odd and Even Numbers</h2>
+    <p>Odd and Even Numbers:</p>
+    <ul id="oddEvenNumbers"></ul>
+
+    <h2>Exercise 4: Check Palindrome</h2>
+    <label for="word">Enter a word:</label>
+    <input type="text" id="word">
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+    <p id="palindromeResult"></p>
+
+    <script>
+        // Exercise 1: Check Leap Year
+        function LeapYear(year) {
+            if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+                return "Yes, " + year + " is a leap year.";
+            } else {
+                return "No, " + year + " is not a leap year.";
+            }
+        }
+
+        function checkLeapYear() {
+            const year = document.getElementById("year").value;
+            const result = LeapYear(year);
+            document.getElementById("leapYearResult").textContent = result;
+        }
+
+        // Exercise 2: Find Sundays
+        function findSunday(startYear, endYear) {
+            let Years = [];
+            for (let year = startYear; year <= endYear; year++) {
+                const date = new Date(year, 0, 1);
+                if (date.getDay() === 0) {
+                    Years.push(year);
+                }
+            }
+            return Years;
+        }
+
+        const sundayYears = findSunday(2014, 2050);
+
+        const sundayYearsList = document.getElementById("sundayYears");
+        sundayYears.forEach(year => {
+            const listItem = document.createElement("li");
+            listItem.textContent = year;
+            sundayYearsList.appendChild(listItem);
+        });
+
+        // Exercise 3: Odd and Even Numbers
+        for (var i = 0; i <= 15; i++) {
+            const listItem = document.createElement("li");
+            if (i % 2 === 0) {
+                listItem.textContent = i + " is an even number";
+            } else {
+                listItem.textContent = i + " is an odd number";
+            }
+            document.getElementById("oddEvenNumbers").appendChild(listItem);
+        }
+
+        // Exercise 4: Check Palindrome
+        function checkPalindrome() {
+            const word = document.getElementById("word").value;
+            const palindrome = check_palindrome(word);
+            document.getElementById("palindromeResult").textContent = palindrome;
+        }
+
+        function check_palindrome(word) {
+            let i = 0;
+            let j = word.length - 1;
+
+            while (i < word.length && j >= 0) {
+                if (word[i] !== word[j]) {
+                    return "It is not a palindrome";
+                }
+                i++;
+                j--;
+            }
+
+            return "It is a palindrome";
+        }
+    </script>
+</body>
+</html>
